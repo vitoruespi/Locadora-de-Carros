@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  locatario: one
+  carro: one
+  data_inicio: 2026-06-11
+  data_fim: 2026-06-11
+  valor_total: 9.99
+
+two:
+  locatario: two
+  carro: two
+  data_inicio: 2026-06-11
+  data_fim: 2026-06-11
+  valor_total: 9.99

@@ -1,0 +1,2 @@
+class Locatario < ApplicationRecord
+end
