@@ -56,6 +56,12 @@ class LocatariosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def destroy_all
+    Locatario.destroy_all
+    respond_to do |format|
+      format.html { redirect_to locatarios_url, notice: "Todos os locatários foram apagados e o ID voltou para 1!" }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

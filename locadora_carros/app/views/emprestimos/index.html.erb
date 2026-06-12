@@ -1,16 +1,51 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Emprestimos" %>
-
-<h1>Emprestimos</h1>
-
-<div id="emprestimos">
-  <% @emprestimos.each do |emprestimo| %>
-    <%= render emprestimo %>
-    <p>
-      <%= link_to "Show this emprestimo", emprestimo %>
-    </p>
-  <% end %>
+<div class="page-header">
+  <h1>Empréstimos Realizados</h1>
 </div>
 
-<%= link_to "New emprestimo", new_emprestimo_path %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Locatário (Cliente)</th>
+    <th>Carro</th>
+    <th>Data Início</th>
+    <th>Data Fim</th>
+    <th>Valor Total</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @emprestimos.each do |emprestimo| %>
+    <tr>
+      <td><%= emprestimo.id %></td>
+      <td><%= emprestimo.locatario&.nome %></td>
+      <td><%= emprestimo.carro&.modelo %></td>
+      <td><%= emprestimo.data_inicio %></td>
+      <td><%= emprestimo.data_fim %></td>
+      <td>R$ <%= emprestimo.valor_total %></td>
+      <td>
+        <%= link_to 'Mostrar', emprestimo_path(emprestimo), class: 'btn btn-default btn-xs' %>
+        <%= link_to 'Editar', edit_emprestimo_path(emprestimo), class: 'btn btn-primary btn-xs' %>
+
+        <%= button_to 'Apagar', emprestimo_path(emprestimo),
+                      method: :delete,
+                      form: { style: 'display:inline-block;' },
+                      class: 'btn btn-danger btn-xs',
+                      onclick: "return confirm('Tem certeza que deseja excluir este empréstimo?');" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<div class="well" style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <%= link_to "Novo Empréstimo", new_emprestimo_path, class: "btn btn-success" %>
+
+  <%= button_to 'Apagar Todos os Registros', destroy_all_emprestimos_path,
+                method: :delete,
+                class: 'btn btn-danger',
+                onclick: "return confirm('CUIDADO! Deseja apagar TODOS os empréstimos?');" %>
+
+  <%= link_to "Voltar para Início", root_path, class: "btn btn-warning" %>
+</div>

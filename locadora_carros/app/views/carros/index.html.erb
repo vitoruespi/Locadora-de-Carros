@@ -1,16 +1,50 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Carros" %>
-
-<h1>Carros</h1>
-
-<div id="carros">
-  <% @carros.each do |carro| %>
-    <%= render carro %>
-    <p>
-      <%= link_to "Show this carro", carro %>
-    </p>
-  <% end %>
+<div class="page-header">
+  <h1>Carros Cadastrados</h1>
 </div>
 
-<%= link_to "New carro", new_carro_path %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Modelo</th>
+    <th>Marca</th>
+    <th>Placa</th>
+    <th>Ano</th>
+    <th>Cor</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @carros.each do |carro| %>
+    <tr>
+      <td><%= carro.id %></td>
+      <td><%= carro.modelo %></td>
+      <td><%= carro.marca %></td>
+      <td><%= carro.placa %></td>
+      <td><%= carro.ano %></td>
+      <td><%= carro.cor %></td>
+      <td>
+        <%= link_to 'Mostrar', carro_path(carro), class: 'btn btn-default btn-xs' %>
+        <%= link_to 'Editar', edit_carro_path(carro), class: 'btn btn-primary btn-xs' %>
+
+        <%= button_to 'Apagar', carro_path(carro),
+                      method: :delete,
+                      form: { style: 'display:inline-block;' },
+                      class: 'btn btn-danger btn-xs',
+                      onclick: "return confirm('Tem certeza que deseja excluir este carro?');" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<div class="well" style="display: flex; gap: 10px;">
+  <%= link_to "Novo Carro", new_carro_path, class: "btn btn-success" %>
+
+  <%= button_to 'Apagar Todos os Registros', destroy_all_carros_path,
+                method: :delete,
+                class: 'btn btn-danger',
+                onclick: "return confirm('CUIDADO! Tem certeza absoluta que deseja apagar TODOS os carros do sistema? Esta ação não pode ser desfeita!');" %>
+  <%= link_to "Voltar para Início", root_path, class: "btn btn-warning" %>
+</div>

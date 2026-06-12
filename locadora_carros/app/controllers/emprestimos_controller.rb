@@ -57,6 +57,13 @@ class EmprestimosController < ApplicationController
     end
   end
 
+  def destroy_all
+    Emprestimo.destroy_all
+    respond_to do |format|
+      format.html { redirect_to emprestimos_url, notice: "Todos os empréstimos foram apagados e o ID voltou para 1!" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_emprestimo

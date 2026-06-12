@@ -1,0 +1,54 @@
+<div class="jumbotron text-center" style="background-color: #f8f9fa; border-radius: 10px; margin-top: 20px;">
+  <h1>Locadora de Carros</h1>
+  <p>Sistema de gerenciamento de frotas, clientes e locações.</p>
+  <hr>
+  <p style="font-size: 16px;">Logado como: <strong><%= current_user.email %></strong></p>
+
+  <%= button_to 'Sair do Sistema', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-sm' %>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="panel panel-primary text-center">
+      <div class="panel-heading">
+        <h3 class="panel-title" style="font-size: 18px; font-weight: bold;">Carros</h3>
+      </div>
+      <div class="panel-body">
+        <p>Gerencie a frota de veículos.</p>
+        <hr>
+        <%= link_to 'Listar Carros', carros_path, class: 'btn btn-warning btn-block' %>
+        <%= link_to 'Adicionar Carro', new_carro_path, class: 'btn btn-info btn-block' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-success text-center">
+      <div class="panel-heading">
+        <h3 class="panel-title" style="font-size: 18px; font-weight: bold;">Locatários</h3>
+      </div>
+      <div class="panel-body">
+        <p>Gerencie os clientes da locadora.</p>
+        <hr>
+        <%= link_to 'Listar Locatários', locatarios_path, class: 'btn btn-warning btn-block' %>
+        <%= link_to 'Adicionar Locatário', new_locatario_path, class: 'btn btn-info btn-block' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-warning text-center">
+      <div class="panel-heading">
+        <h3 class="panel-title" style="font-size: 18px; font-weight: bold;">Empréstimos</h3>
+      </div>
+      <div class="panel-body">
+        <p>Controle de locações e histórico.</p>
+        <hr>
+        <%= link_to 'Listar Empréstimos', emprestimos_path, class: 'btn btn-warning btn-block' %>
+        <%= link_to 'Adicionar Empréstimo', new_emprestimo_path, class: 'btn btn-info btn-block' %>
+      </div>
+    </div>
+  </div>
+
+</div>

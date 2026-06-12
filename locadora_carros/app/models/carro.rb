@@ -11,4 +11,12 @@ class Carro < ApplicationRecord
 
   # Garante que não existirão dois carros com a mesma placa no sistema da locadora.
   validates :placa, uniqueness: true
+  def self.to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << %w{id Modelo Placa}
+      all.each do |carro|
+        csv << [carro.id, carro.modelo, carro.placa]
+      end
+    end
+  end
 end

@@ -81,3 +81,10 @@ gem 'twitter-bootstrap-rails'
 
 # d) Geração de PDF
 gem 'prawn'
+gem 'prawn-table'
+
+# Quis colocar uma gema de tradução
+#
+gem 'rails-i18n'
+#Gema para arrumar o rails console
+gem 'fiddle'

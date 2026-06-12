@@ -7,3 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+puts "Cadastrando carros de teste..."
+30.times do |i|
+  Carro.create!(
+    modelo: " #{i + 1}",
+    marca: "#{%w[Toyota Fiat Ford Honda Volkswagen Chevrolet BYD Hyundai GWM BMW Porsche Land_Rover].sample}",
+    placa: "ABC-10#{i < 10 ? "0#{i}" : i}",
+    ano: rand(1990..2026),
+    cor: %w[Prata Preto Branco Vermelho Amarelo Verde Cinza "Azul Escuro" "Azul Claro" "Branco Neve" "Amarelo Banana Prateado"].sample
+  )
+end
+puts "Carros cadastrados com sucesso!"

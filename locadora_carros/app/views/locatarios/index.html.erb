@@ -1,16 +1,49 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Locatarios" %>
-
-<h1>Locatarios</h1>
-
-<div id="locatarios">
-  <% @locatarios.each do |locatario| %>
-    <%= render locatario %>
-    <p>
-      <%= link_to "Show this locatario", locatario %>
-    </p>
-  <% end %>
+<div class="page-header">
+  <h1>Locatários Cadastrados</h1>
 </div>
 
-<%= link_to "New locatario", new_locatario_path %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>CPF</th>
+    <th>Telefone</th>
+    <th>Idade</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @locatarios.each do |locatario| %>
+    <tr>
+      <td><%= locatario.id %></td>
+      <td><%= locatario.nome %></td>
+      <td><%= locatario.cpf %></td>
+      <td><%= locatario.telefone %></td>
+      <td><%= locatario.idade %></td>
+      <td>
+        <%= link_to 'Mostrar', locatario_path(locatario), class: 'btn btn-default btn-xs' %>
+        <%= link_to 'Editar', edit_locatario_path(locatario), class: 'btn btn-primary btn-xs' %>
+
+        <%= button_to 'Apagar', locatario_path(locatario),
+                      method: :delete,
+                      form: { style: 'display:inline-block;' },
+                      class: 'btn btn-danger btn-xs',
+                      onclick: "return confirm('Tem certeza que deseja excluir este locatário?');" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<div class="well" style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <%= link_to "Novo Locatário", new_locatario_path, class: "btn btn-success" %>
+
+  <%= button_to 'Apagar Todos os Registros', destroy_all_locatarios_path,
+                method: :delete,
+                class: 'btn btn-danger',
+                onclick: "return confirm('CUIDADO! Deseja apagar TODOS os locatários?');" %>
+
+  <%= link_to "Voltar para Início", root_path, class: "btn btn-warning" %>
+</div>

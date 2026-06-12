@@ -57,6 +57,13 @@ class CarrosController < ApplicationController
     end
   end
 
+  def destroy_all
+    Carro.destroy_all
+    respond_to do |format|
+      format.html { redirect_to carros_url, notice: "Todos os carros foram apagados com sucesso!" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_carro

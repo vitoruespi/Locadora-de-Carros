@@ -23,5 +23,8 @@ module LocadoraCarros
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Deixa o idioma padrão do projeto como pt-br
+    config.i18n.default_locale = :"pt-BR"
   end
 end
