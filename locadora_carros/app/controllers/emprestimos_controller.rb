@@ -4,6 +4,39 @@ class EmprestimosController < ApplicationController
   # GET /emprestimos or /emprestimos.json
   def index
     @emprestimos = Emprestimo.all
+    respond_to do |format|
+      format.html
+
+      # Geração do CSV
+      format.csv { send_data Emprestimo.all.to_csv, filename: "historico_emprestimos.csv" }
+
+      # Geração do PDF com Tabela Bonita
+      format.pdf do
+        pdf = Prawn::Document.new
+        pdf.text "Relatório de Empréstimos", size: 20, style: :bold, align: :center
+        pdf.move_down 20
+
+        tabela_dados = [["ID", "Cliente", "Carro", "Data Início", "Data Fim", "Valor Total"]]
+
+        @emprestimos.each do |emp|
+          tabela_dados << [
+            emp.id.to_s,
+            emp.locatario&.nome.to_s,
+            emp.carro&.modelo.to_s,
+            emp.data_inicio.strftime("%d/%m/%Y"), # Formata a data para o padrão BR
+            emp.data_fim.strftime("%d/%m/%Y"),
+            "R$ #{emp.valor_total}"
+          ]
+        end
+
+        pdf.table(tabela_dados, header: true, width: pdf.bounds.width) do
+          row(0).font_style = :bold
+          row(0).background_color = "CCCCCC"
+        end
+
+        send_data pdf.render, filename: 'relatorio_emprestimos.pdf', type: 'application/pdf', disposition: "inline"
+      end
+    end
   end
 
   # GET /emprestimos/1 or /emprestimos/1.json

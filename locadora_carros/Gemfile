@@ -88,3 +88,6 @@ gem 'prawn-table'
 gem 'rails-i18n'
 #Gema para arrumar o rails console
 gem 'fiddle'
+
+#Gema para CSV
+gem 'csv'

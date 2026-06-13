@@ -39,6 +39,8 @@
 <br>
 <div class="well" style="display: flex; gap: 10px; flex-wrap: wrap;">
   <%= link_to "Novo Locatário", new_locatario_path, class: "btn btn-success" %>
+  <%= link_to "Baixar Relatório (PDF)", locatarios_path(format: :pdf), class: "btn btn-danger" %>
+  <%= link_to "Exportar Dados (CSV)", locatarios_path(format: :csv), class: "btn btn-primary" %>
 
   <%= button_to 'Apagar Todos os Registros', destroy_all_locatarios_path,
                 method: :delete,

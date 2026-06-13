@@ -1,3 +1,5 @@
+
+require 'csv'
 class Locatario < ApplicationRecord
   # :destroy: Significa que, se eu excluir o cliente do sistema,
   # todos os históricos de empréstimos dele serão apagados automaticamente do banco.
@@ -13,4 +15,21 @@ class Locatario < ApplicationRecord
 
   #Indica que é um número que bloqueia o cadastro se o cliente for menor de idade.
   validates :idade, numericality: { greater_than_or_equal_to: 18 }
+
+  def self.to_csv
+    CSV.generate(headers: true, col_sep: ';') do |csv|
+      # Cabeçalho do arquivo
+      csv << %w{ID Nome CPF Telefone Idade}
+
+      all.each do |locatario|
+        csv << [
+          locatario.id,
+          locatario.nome,
+          locatario.cpf,
+          locatario.telefone,
+          locatario.idade
+        ]
+      end
+    end
+  end
 end

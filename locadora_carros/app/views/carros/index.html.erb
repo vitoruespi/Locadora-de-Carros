@@ -2,6 +2,7 @@
   <h1>Carros Cadastrados</h1>
 </div>
 
+
 <table class="table table-striped">
   <thead>
   <tr>
@@ -39,12 +40,24 @@
 </table>
 
 <br>
-<div class="well" style="display: flex; gap: 10px;">
+<div class="text-center">
+  <%= paginate @carros %>
+</div>
+
+<br>
+<div class="well" style="display: flex; gap: 10px; flex-wrap: wrap;">
+
   <%= link_to "Novo Carro", new_carro_path, class: "btn btn-success" %>
+
+  <%= link_to "Baixar Relatório (PDF)", carros_path(format: :pdf), class: "btn btn-danger" %>
+
+  <%= link_to "Exportar Dados (CSV)", carros_path(format: :csv), class: "btn btn-primary" %>
 
   <%= button_to 'Apagar Todos os Registros', destroy_all_carros_path,
                 method: :delete,
                 class: 'btn btn-danger',
-                onclick: "return confirm('CUIDADO! Tem certeza absoluta que deseja apagar TODOS os carros do sistema? Esta ação não pode ser desfeita!');" %>
-  <%= link_to "Voltar para Início", root_path, class: "btn btn-warning" %>
+                onclick: "return confirm('CUIDADO! Tem certeza absoluta que deseja apagar TODOS os carros do sistema?');" %>
+
+  <%= link_to "Voltar para Início", root_path, class: "btn btn-info" %>
+
 </div>

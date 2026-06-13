@@ -4,6 +4,39 @@ class LocatariosController < ApplicationController
   # GET /locatarios or /locatarios.json
   def index
     @locatarios = Locatario.all
+
+    respond_to do |format|
+      format.html
+
+      # Geração do CSV
+      format.csv { send_data Locatario.all.to_csv, filename: "lista_locatarios.csv" }
+
+      # Geração do PDF com Tabela Bonita
+      format.pdf do
+        pdf = Prawn::Document.new
+        pdf.text "Relatório de Locatários", size: 20, style: :bold, align: :center
+        pdf.move_down 20
+
+        tabela_dados = [["ID", "Nome", "CPF", "Telefone", "Idade"]]
+
+        @locatarios.each do |loc|
+          tabela_dados << [
+            loc.id.to_s,
+            loc.nome,
+            loc.cpf,
+            loc.telefone,
+            loc.idade.to_s
+          ]
+        end
+
+        pdf.table(tabela_dados, header: true, width: pdf.bounds.width) do
+          row(0).font_style = :bold
+          row(0).background_color = "CCCCCC"
+        end
+
+        send_data pdf.render, filename: 'relatorio_locatarios.pdf', type: 'application/pdf', disposition: "inline"
+      end
+    end
   end
 
   # GET /locatarios/1 or /locatarios/1.json

@@ -2,9 +2,37 @@ class CarrosController < ApplicationController
   before_action :set_carro, only: %i[ show edit update destroy ]
 
   # GET /carros or /carros.json
-  #limita a quantidade de carror que aparece pro página
+
   def index
-     @carros = Carro.page(params[:page]).per(5) 
+    #limita a quantidade de carros que aparece pro página :v
+     @carros = Carro.page(params[:page]).per(5)
+
+    #Loop responsavel
+     respond_to do |format|
+       format.html
+
+       #Gera o CSV
+       format.csv { send_data Carro.all.to_csv, filename: "lista_carros.csv" }
+
+       #Gera o PDF com Tabela
+       format.pdf do
+         pdf = Prawn::Document.new
+         pdf.text "Relatório de Carros Cadastrados", size: 20, style: :bold, align: :center
+         pdf.move_down 20
+
+         tabela_dados = [["ID", "Modelo", "Marca", "Placa"]]
+         @carros.each do |carro|
+           tabela_dados << [carro.id.to_s, carro.modelo, carro.marca, carro.placa]
+         end
+
+         pdf.table(tabela_dados, header: true, width: pdf.bounds.width) do
+           row(0).font_style = :bold
+           row(0).background_color = "CCCCCC"
+         end
+
+         send_data pdf.render, filename: 'relatorio_carros.pdf', type: 'application/pdf', disposition: "inline"
+       end
+     end
   end
 
   # GET /carros/1 or /carros/1.json
