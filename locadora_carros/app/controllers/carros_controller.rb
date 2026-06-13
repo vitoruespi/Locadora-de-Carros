@@ -2,8 +2,9 @@ class CarrosController < ApplicationController
   before_action :set_carro, only: %i[ show edit update destroy ]
 
   # GET /carros or /carros.json
+  #limita a quantidade de carror que aparece pro página
   def index
-    @carros = Carro.all
+     @carros = Carro.page(params[:page]).per(5) 
   end
 
   # GET /carros/1 or /carros/1.json
