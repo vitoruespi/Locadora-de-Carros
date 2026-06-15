@@ -1,54 +1,68 @@
-<div class="jumbotron text-center" style="background-color: #f8f9fa; border-radius: 10px; margin-top: 20px;">
-  <h1>Locadora de Carros</h1>
-  <p>Sistema de gerenciamento de frotas, clientes e locações.</p>
-  <hr>
-  <p style="font-size: 16px;">Logado como: <strong><%= current_user.email %></strong></p>
+<div class="container">
 
-  <%= button_to 'Sair do Sistema', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-sm' %>
+  <div class="jumbotron text-center" style="background-color: #f8f9fa; border-radius: 10px; margin-top: 20px;">
+    <h1>Locadora de Carros</h1>
+    <p>Sistema de gerenciamento.</p>
+    <hr>
+  </div>
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light mb-4" style="background-color: #e9ecef; border-radius: 5px; border: 1px solid #ddd;">
+  <div class="container-fluid">
+    
+    <a class="navbar-brand" href="/" style="font-weight: bold;">Sistema de Locação</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLocadora" aria-controls="navbarLocadora" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarLocadora">
+      <ul class="navbar-nav ms-auto"> 
+        
+        <li class="nav-item">
+          <%= link_to 'Carros', carros_path, class: 'nav-link', style: 'border: 1px solid #ced4da; border-radius: 5px; margin-left: 10px;' %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to 'Locatários', locatarios_path, class: 'nav-link', style: 'border: 1px solid #ced4da; border-radius: 5px; margin-left: 10px;' %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to 'Empréstimos', emprestimos_path, class: 'nav-link', style: 'border: 1px solid #ced4da; border-radius: 5px; margin-left: 10px;' %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to 'Adicionar Empréstimo', new_emprestimo_path, class: 'nav-link text-info', style: 'border: 1px solid #ced4da; border-radius: 5px; margin-left: 10px;' %>
+        </li>
+
+      </ul>
+    </div>
+    
+  </div>
+</nav>
+<div class="container text-center mt-4">
+  <%= image_tag 'imgfundo.png', class: 'img-fluid rounded shadow-sm', alt: 'Imagem de um carro alugado' %>
 </div>
 
-<div class="row">
 
-  <div class="col-md-4">
-    <div class="panel panel-primary text-center">
-      <div class="panel-heading">
-        <h3 class="panel-title" style="font-size: 18px; font-weight: bold;">Carros</h3>
-      </div>
-      <div class="panel-body">
-        <p>Gerencie a frota de veículos.</p>
-        <hr>
-        <%= link_to 'Listar Carros', carros_path, class: 'btn btn-warning btn-block' %>
-        <%= link_to 'Adicionar Carro', new_carro_path, class: 'btn btn-info btn-block' %>
-      </div>
+
+
+
+   
+    
+    <div class="jumbotron d-flex flex-column align-items-center justify-content-center p-3 mx-auto" style="background-color: #f8f9fa; border-radius: 10px; border: 1px solid #ddd; max-width: 400px;">
+      
+      <p class="mb-3" style="font-size: 16px;">
+        Logado como: <strong><%= current_user.email %></strong>
+      </p>
+
+      <%= button_to 'Sair do Sistema', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-sm' %>
+      
     </div>
+
   </div>
 
-  <div class="col-md-4">
-    <div class="panel panel-success text-center">
-      <div class="panel-heading">
-        <h3 class="panel-title" style="font-size: 18px; font-weight: bold;">Locatários</h3>
-      </div>
-      <div class="panel-body">
-        <p>Gerencie os clientes da locadora.</p>
-        <hr>
-        <%= link_to 'Listar Locatários', locatarios_path, class: 'btn btn-warning btn-block' %>
-        <%= link_to 'Adicionar Locatário', new_locatario_path, class: 'btn btn-info btn-block' %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="panel panel-warning text-center">
-      <div class="panel-heading">
-        <h3 class="panel-title" style="font-size: 18px; font-weight: bold;">Empréstimos</h3>
-      </div>
-      <div class="panel-body">
-        <p>Controle de locações e histórico.</p>
-        <hr>
-        <%= link_to 'Listar Empréstimos', emprestimos_path, class: 'btn btn-warning btn-block' %>
-        <%= link_to 'Adicionar Empréstimo', new_emprestimo_path, class: 'btn btn-info btn-block' %>
-      </div>
-    </div>
-  </div>
-
-</div>
+</div> 
