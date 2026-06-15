@@ -10,31 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_12_180059) do
-  create_table "carros", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[8.1].define(version: 2026_06_14_233503) do
+  create_table "carros", primary_key: "placa", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "ano"
     t.string "cor"
     t.datetime "created_at", null: false
     t.string "marca"
     t.string "modelo"
-    t.string "placa"
+    t.string "status", default: "disponivel"
     t.datetime "updated_at", null: false
   end
 
   create_table "emprestimos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "carro_id", null: false
+    t.string "carro_id", null: false
     t.datetime "created_at", null: false
     t.date "data_fim"
     t.date "data_inicio"
-    t.bigint "locatario_id", null: false
+    t.string "locatario_id", null: false
+    t.string "status", default: "ativo"
     t.datetime "updated_at", null: false
     t.decimal "valor_total", precision: 10
     t.index ["carro_id"], name: "index_emprestimos_on_carro_id"
     t.index ["locatario_id"], name: "index_emprestimos_on_locatario_id"
   end
 
-  create_table "locatarios", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "cpf"
+  create_table "locatarios", primary_key: "cpf", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "idade"
     t.string "nome"
@@ -54,6 +54,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_180059) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "emprestimos", "carros"
-  add_foreign_key "emprestimos", "locatarios"
+  add_foreign_key "emprestimos", "carros", primary_key: "placa"
+  add_foreign_key "emprestimos", "locatarios", primary_key: "cpf"
 end

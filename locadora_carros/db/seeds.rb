@@ -15,7 +15,18 @@ puts "Cadastrando carros de teste..."
     marca: "#{%w[Toyota Fiat Ford Honda Volkswagen Chevrolet BYD Hyundai GWM BMW Porsche Land_Rover].sample}",
     placa: "ABC-10#{i < 10 ? "0#{i}" : i}",
     ano: rand(1990..2026),
-    cor: %w[Prata Preto Branco Vermelho Amarelo Verde Cinza "Azul Escuro" "Azul Claro" "Branco Neve" "Amarelo Banana Prateado"].sample
+    cor: %w[Prata Preto Branco Vermelho Amarelo Verde Cinza Azul Escuro Azul Claro Branco Neve Amarelo Banana Prateado"].sample
   )
 end
-puts "Carros cadastrados com sucesso!"
+
+nomes = ["João Silva", "Maria Santos", "Pedro Almeida", "Ana Costa", "Lucas Oliveira"]
+telefones = ["11999998888", "21988887777", "31977776666", "41966665555", "51955554444"]
+
+5.times do |i|
+  Locatario.create!(
+    nome: nomes[i],
+    cpf: "1234567890#{i}", # Gera CPFs textuais únicos: 12345678900, 12345678901...
+    idade: rand(21..65),
+    telefone: telefones[i]
+  )
+end

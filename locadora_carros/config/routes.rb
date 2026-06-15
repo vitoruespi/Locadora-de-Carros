@@ -17,6 +17,12 @@ Rails.application.routes.draw do
       delete :destroy_all
     end
   end
+
+  resources :emprestimos do
+    member do
+      patch :marcar_emprestimo_como_finalizado # <- Alterado aqui
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

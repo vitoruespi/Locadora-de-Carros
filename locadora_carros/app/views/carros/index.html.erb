@@ -6,12 +6,12 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th>ID</th>
+    <th>Placa</th>
     <th>Modelo</th>
     <th>Marca</th>
-    <th>Placa</th>
     <th>Ano</th>
     <th>Cor</th>
+    <th>Disponibilidade</th>
     <th>Ações</th>
   </tr>
   </thead>
@@ -21,9 +21,9 @@
       <td><%= carro.id %></td>
       <td><%= carro.modelo %></td>
       <td><%= carro.marca %></td>
-      <td><%= carro.placa %></td>
       <td><%= carro.ano %></td>
       <td><%= carro.cor %></td>
+      <td><%= carro.status %></td>
       <td>
         <%= link_to 'Mostrar', carro_path(carro), class: 'btn btn-default btn-xs' %>
         <%= link_to 'Editar', edit_carro_path(carro), class: 'btn btn-primary btn-xs' %>

@@ -11,6 +11,7 @@
     <th>Data Início</th>
     <th>Data Fim</th>
     <th>Valor Total</th>
+    <th>Status</th>
     <th>Ações</th>
   </tr>
   </thead>
@@ -23,6 +24,15 @@
       <td><%= emprestimo.data_inicio %></td>
       <td><%= emprestimo.data_fim %></td>
       <td>R$ <%= emprestimo.valor_total %></td>
+      <td><%= emprestimo.status %></td> <td>
+      <%# O botão só aparece se o status for ativo %>
+      <% if emprestimo.ativo? %>
+        <%= button_to "Finalizar",
+                      marcar_emprestimo_como_finalizado_emprestimo_path(emprestimo),
+                      method: :patch,
+                      class: "btn btn-success btn-sm",
+                      data: { confirm: "Confirmar a devolução deste veículo hoje?" } %>
+      <% end %>
       <td>
         <%= link_to 'Mostrar', emprestimo_path(emprestimo), class: 'btn btn-default btn-xs' %>
         <%= link_to 'Editar', edit_emprestimo_path(emprestimo), class: 'btn btn-primary btn-xs' %>

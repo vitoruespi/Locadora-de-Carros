@@ -1,6 +1,8 @@
 
 require 'csv'
 class Locatario < ApplicationRecord
+  self.primary_key = 'cpf'
+
   # :destroy: Significa que, se eu excluir o cliente do sistema,
   # todos os históricos de empréstimos dele serão apagados automaticamente do banco.
   has_many :emprestimos, dependent: :destroy

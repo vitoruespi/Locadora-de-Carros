@@ -5,9 +5,8 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th>ID</th>
-    <th>Nome</th>
     <th>CPF</th>
+    <th>Nome</th>
     <th>Telefone</th>
     <th>Idade</th>
     <th>Ações</th>
@@ -16,9 +15,8 @@
   <tbody>
   <% @locatarios.each do |locatario| %>
     <tr>
-      <td><%= locatario.id %></td>
-      <td><%= locatario.nome %></td>
       <td><%= locatario.cpf %></td>
+      <td><%= locatario.nome %></td>
       <td><%= locatario.telefone %></td>
       <td><%= locatario.idade %></td>
       <td>

@@ -96,6 +96,12 @@ class EmprestimosController < ApplicationController
       format.html { redirect_to emprestimos_url, notice: "Todos os empréstimos foram apagados e o ID voltou para 1!" }
     end
   end
+  def marcar_emprestimo_como_finalizado
+    @emprestimo = Emprestimo.find(params[:id])
+    @emprestimo.update(status: "finalizado")
+    @emprestimo.carro.update(status: "disponivel")
+    redirect_to emprestimos_path
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
