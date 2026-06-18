@@ -3,7 +3,9 @@ class EmprestimosController < ApplicationController
 
   # GET /emprestimos or /emprestimos.json
   def index
-    @emprestimos = Emprestimo.all
+    @emprestimos = Emprestimo.page(params[:page]).per(5)
+    @emprestimoPDF = Emprestimo.all
+
     respond_to do |format|
       format.html
 
@@ -18,7 +20,7 @@ class EmprestimosController < ApplicationController
 
         tabela_dados = [["ID", "Cliente", "Carro", "Data Início", "Data Fim", "Valor Total"]]
 
-        @emprestimos.each do |emp|
+        @emprestimoPDF.each do |emp|
           tabela_dados << [
             emp.id.to_s,
             emp.locatario&.nome.to_s,

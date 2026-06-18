@@ -3,13 +3,14 @@ class LocatariosController < ApplicationController
 
   # GET /locatarios or /locatarios.json
   def index
-    @locatarios = Locatario.all
+    @locatarios = Locatario.page(params[:page]).per(8)
+    @locatariosTodos = Locatario.all
 
     respond_to do |format|
       format.html
 
       # Geração do CSV
-      format.csv { send_data Locatario.all.to_csv, filename: "lista_locatarios.csv" }
+      format.csv { send_data @locatariosTodos.to_csv, filename: "lista_locatarios.csv" }
 
       # Geração do PDF com Tabela Bonita
       format.pdf do
@@ -19,7 +20,7 @@ class LocatariosController < ApplicationController
 
         tabela_dados = [["ID", "Nome", "CPF", "Telefone", "Idade"]]
 
-        @locatarios.each do |loc|
+        @locatariosTodos.each do |loc|
           tabela_dados << [
             loc.id.to_s,
             loc.nome,

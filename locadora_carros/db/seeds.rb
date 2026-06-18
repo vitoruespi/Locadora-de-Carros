@@ -30,3 +30,22 @@ telefones = ["11999998888", "21988887777", "31977776666", "41966665555", "519555
     telefone: telefones[i]
   )
 end
+
+sobrenomes = %w[Silva Santos Oliveira Souza Ferreira Alves Pereira Lima Costa Gomes Martins Ribeiro Almeida Carvalho Costa]
+
+30.times do |i|
+  Locatario.create!(
+    nome: "#{nomes.sample} #{sobrenomes.sample}",
+
+    # O 'format' garante que o i (0, 1, 2) vire sempre dois dígitos (00, 01, 02)
+    # Isso gera CPFs únicos de 11 dígitos: "10020030000", "10020030001", etc.
+    cpf: "100.200.300-#{format('%02d', i)}",
+
+    # Gera um número de telefone com DDD e formato padrão, ex: (11) 98765-4321
+    telefone: "(#{rand(11..99)}) 9#{rand(7000..9999)}-#{rand(1000..9999)}",
+
+    # Sorteia uma idade realista para aluguel de carros (entre 21 e 75 anos)
+    idade: rand(21..75)
+  )
+end
+

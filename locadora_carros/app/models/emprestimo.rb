@@ -1,5 +1,5 @@
 class Emprestimo < ApplicationRecord
-  # Entidade Associativa
+    # Entidade Associativa
   belongs_to :locatario, foreign_key: 'locatario_id', primary_key: 'cpf'
   belongs_to :carro, foreign_key: 'carro_id', primary_key: 'placa'
 

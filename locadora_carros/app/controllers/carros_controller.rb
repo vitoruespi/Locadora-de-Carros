@@ -5,7 +5,8 @@ class CarrosController < ApplicationController
 
   def index
     #limita a quantidade de carros que aparece pro página :v
-     @carros = Carro.page(params[:page]).per(5)
+     @carros = Carro.page(params[:page]).per(8)
+     @carrosPDF = Carro.all
 
     #Loop responsavel
      respond_to do |format|
@@ -21,7 +22,7 @@ class CarrosController < ApplicationController
          pdf.move_down 20
 
          tabela_dados = [["ID", "Modelo", "Marca", "Placa"]]
-         @carros.each do |carro|
+         @carrosPDF.each do |carro|
            tabela_dados << [carro.id.to_s, carro.modelo, carro.marca, carro.placa]
          end
 
